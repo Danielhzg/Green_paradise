@@ -1,0 +1,30 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import './Header.css';
+
+const Header = () => {
+  const cartItems = useSelector(state => state.cart.items);
+  const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+
+  return (
+    <header className="header">
+      <div className="header-container">
+        <Link to="/" className="logo">
+          <h1>Green Paradise</h1>
+        </Link>
+        <nav className="nav">
+          <Link to="/" className="nav-link">Home</Link>
+          <Link to="/products" className="nav-link">Products</Link>
+          <Link to="/cart" className="nav-link cart-link">
+            <span className="cart-icon">🛒</span>
+            <span className="cart-count">{totalItems}</span>
+          </Link>
+        </nav>
+      </div>
+    </header>
+  );
+};
+
+export default Header;
+
